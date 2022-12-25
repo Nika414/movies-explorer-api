@@ -1,6 +1,7 @@
 # Backend для приложеия movies-explorer
 
-### [Ссылка на репозиторий](https://github.com/Nika414/movies-explorer-api)
+### [Ссылка на репозиторий](https://github.com/Nika414/movies-explorer-api);
+### [Ссылка на API](https://api.mmovies-explorer.nomoredomains.club/)
 
 ## Установка и запуск
 ### Требования:
