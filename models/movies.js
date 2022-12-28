@@ -1,23 +1,35 @@
 const mongoose = require('mongoose');
-
-const { urlSchema, textSchema } = require('../validators/general');
+const { urlSchema } = require('../validators/general');
+const { urlRequired } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema(
   {
-    country: textSchema,
-    director: textSchema,
+    country: {
+      type: String,
+      required: true,
+    },
+    director: {
+      type: String,
+      required: true,
+    },
     duration: {
       type: Number,
       required: true,
     },
-    year: textSchema,
-    description: textSchema,
+    year: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
     image: {
       type: String,
       required: true,
       validate: {
         validator: (value) => !urlSchema.validate(value).error,
-        message: 'Постер должен быть в формате URL',
+        message: `Постер ${urlRequired}`,
       },
     },
     trailer: {
@@ -25,7 +37,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (value) => !urlSchema.validate(value).error,
-        message: 'Трейлер должен быть в формате URL',
+        message: `Трейлер ${urlRequired}`,
       },
     },
     thumbnail: {
@@ -33,7 +45,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: (value) => !urlSchema.validate(value).error,
-        message: 'Постер должен быть в формате URL',
+        message: `Постер ${urlRequired}`,
       },
     },
     owner: {
@@ -44,10 +56,15 @@ const movieSchema = new mongoose.Schema(
     movieId: {
       type: Number,
       required: true,
-      min: 1,
     },
-    nameRU: textSchema,
-    nameEN: textSchema,
+    nameRU: {
+      type: String,
+      required: true,
+    },
+    nameEN: {
+      type: String,
+      required: true,
+    },
   },
 );
 

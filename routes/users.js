@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 
-const { textSchema } = require('../validators/general');
 const { emailSchema } = require('../validators/users');
 const {
   getCurrentUser, changeProfile,
@@ -11,7 +10,7 @@ router.get('/me', getCurrentUser);
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({
-    name: textSchema,
+    name: Joi.string().min(2).max(30),
     email: emailSchema,
   }),
 }), changeProfile);

@@ -1,8 +1,9 @@
+const { emailisTaken } = require('../utils/constants');
+
 class EmailIsTakenError extends Error {
-  constructor(message) {
+  constructor(message = emailisTaken) {
     super(message);
     this.statusCode = 409;
-    this.message = 'Пользователь с таким email уже зарегистрирован';
   }
 }
 
