@@ -5,7 +5,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const EmailIsTakenError = require('../errors/EmailIsTakenError');
 const BadRequestError = require('../errors/BadRequestError');
 const User = require('../models/users');
-const { userNotFound, validationFailed } = require('../utils/constants');
+const { errorMessages } = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -25,9 +25,9 @@ module.exports.createUser = (req, res, next) => {
         })
         .catch((err) => {
           if (err.code === 11000) {
-            next(new EmailIsTakenError());
+            next(new EmailIsTakenError(errorMessages.emailIsTaken));
           } else if (err.name === 'ValidationError') {
-            next(new BadRequestError(validationFailed));
+            next(new BadRequestError(errorMessages.validationFailed));
           } else next(err);
         });
     })
@@ -38,7 +38,7 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user.id)
     .then((result) => {
       if (!result) {
-        throw new NotFoundError(userNotFound);
+        throw new NotFoundError(errorMessages.userNotFound);
       } else {
         const response = result.toObject();
         delete response._id;
@@ -73,16 +73,16 @@ module.exports.changeProfile = (req, res, next) => {
   )
     .then((result) => {
       if (!result) {
-        throw new NotFoundError(userNotFound);
+        throw new NotFoundError(errorMessages.userNotFound);
       } else {
         res.send(result);
       }
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new EmailIsTakenError());
+        next(new EmailIsTakenError(errorMessages.emailIsTaken));
       } else if (err.name === 'ValidationError') {
-        next(new BadRequestError(validationFailed));
+        next(new BadRequestError(errorMessages.validationFailed));
       } else { next(err); }
     });
 };

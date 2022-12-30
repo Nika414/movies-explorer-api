@@ -10,7 +10,7 @@ const app = express();
 const process = require('process');
 const { errors } = require('celebrate');
 
-const { PORT, NODE_ENV, DB } = process.env;
+const { PORT = 3000 } = process.env;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const NotFoundError = require('./errors/NotFoundError');
@@ -24,7 +24,7 @@ const { mongoServer, rateLimiterConfig } = require('./utils/config');
 process.on('uncaughtException', (err, origin) => {
   console.log(`message: ${origin} ${err.name} c текстом ${err.message} не была обработана. Обратите внимание!`);
 });
-mongoose.connect(NODE_ENV === 'production' ? `mongodb://localhost:27017/${NODE_ENV === 'production' ? DB : 'bitfilmsdb'}` : mongoServer, {}, () => {
+mongoose.connect(mongoServer, {}, () => {
   console.log('DB is working');
 });
 

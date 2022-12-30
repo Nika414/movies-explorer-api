@@ -1,24 +1,11 @@
 const router = require('express').Router();
-const { celebrate, Joi, Segments } = require('celebrate');
-const { textSchema } = require('../validators/general');
-const { emailSchema, passwordSchema } = require('../validators/users');
+const { signUpSchema, signInSchema } = require('../validators/users');
 const {
   createUser, login,
 } = require('../controllers/users');
 
-router.post('/signup', celebrate({
-  [Segments.BODY]: Joi.object().keys({
-    name: textSchema.min(2).max(30),
-    email: emailSchema.required(),
-    password: passwordSchema,
-  }),
-}), createUser);
+router.post('/signup', signUpSchema, createUser);
 
-router.post('/signin', celebrate({
-  [Segments.BODY]: Joi.object().keys({
-    email: emailSchema.required(),
-    password: passwordSchema,
-  }),
-}), login);
+router.post('/signin', signInSchema, login);
 
 module.exports = router;

@@ -12,7 +12,7 @@ module.exports.allowedHeaders = [
 ];
 
 module.exports.errorMessages = {
-  emailisTaken: 'Пользователь с таким email уже зарегистрирован',
+  emailIsTaken: 'Пользователь с таким email уже зарегистрирован',
   authRequired: 'Требуется авторизация',
   urlRequired: 'должен быть в формате URL',
   emailRequired: 'Email должен быть вида a@b.cs',
@@ -23,4 +23,5 @@ module.exports.errorMessages = {
   userNotFound: 'Пользователя с указанным id не существует',
   validationFailed: 'Переданы некорректные данные',
   tooMuchRequests: 'Слишком много запросов',
+  serverError: 'На сервере произошла ошибка',
 };
