@@ -9,7 +9,7 @@ module.exports.movieSchema = celebrate({
     year: textSchema,
     description: textSchema,
     thumbnail: urlSchema,
-    movieId: numberSchema,
+    id: numberSchema,
     nameRU: textSchema,
     nameEN: textSchema,
     image: urlSchema.required(),
