@@ -42,7 +42,6 @@ const movieSchema = new mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      required: true,
       validate: {
         validator: (value) => !urlSchema.validate(value).error,
         message: `Постер ${urlRequired}`,
